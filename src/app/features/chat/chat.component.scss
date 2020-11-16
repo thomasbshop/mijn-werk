@@ -1,4 +1,39 @@
-  
-  .right-layout {
+.layout {
+  min-height: 100vh;
+}
+
+.right-layout {
     margin-left: 256px;
-  }
+}
+
+:host {
+  display: flex;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-layout {
+  height: 100vh;
+}
+
+app-side-nav {
+  margin: 64px 16px 0;
+  overflow: initial;
+} 
+
+app-chat-window {
+  margin: 64px 16px 0;
+  overflow: initial;
+}
+
+app-side-nav {
+  overflow: auto; // makes the trigger disappear.
+  height: 100%;
+  position: fixed;
+  left: 0;
+}
+ 
+nz-footer {
+  text-align: center;
+}

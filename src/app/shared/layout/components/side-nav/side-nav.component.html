@@ -7,41 +7,13 @@
     [nzTrigger]="null">
     <div class="ant-layout-sider-children" >
     <div class="sidebar-logo">
-    <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Mijn Werk App</h1>
-    </a>
+        <a href="https://ng.ant.design/" target="_blank">
+            <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+            <h1>Mijn Werk App</h1>
+        </a>
     </div>
-    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-    <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-        <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-            <a>Monitor1</a>
-        </li>
-        <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-        </li>
-        </ul>
-    </li>
-    <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-        <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
-        </li>
-        </ul>
-    </li>
-    </ul>
-    <ul nz-menu nzMode="inline" class="sider-menu">
-        <li nz-submenu nzOpen nzIcon="user" nzTitle="subnav 1">
-        <ul>
-            <li nz-menu-item nzSelected>option1</li>
-            <li nz-menu-item>option2</li>
-            <li nz-menu-item>option3</li>
-        </ul>
-        </li>
+    <ul nz-menu nzMode="inline" *ngIf="menuOptions.length">
+        <li nz-menu-item *ngFor="let option of menuOptions">{{ option }}</li>
     </ul>
     </div>
     <!-- <div nz-sider-trigger nzTheme="dark" 

@@ -1,1 +1,27 @@
-<p>side-nav works!</p>
+<nz-sider
+    nzTheme="light"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="ant-layout-sider-children" >
+    <div class="sidebar-logo">
+        <a href="https://ng.ant.design/" target="_blank">
+            <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+            <h1>Mijn Werk App</h1>
+        </a>
+    </div>
+    <ul nz-menu nzMode="inline" *ngIf="menuOptions.length">
+        <li nz-menu-item *ngFor="let option of menuOptions">{{ option }}</li>
+    </ul>
+    </div>
+    <!-- <div nz-sider-trigger nzTheme="dark" 
+        class="ant-layout-sider-zero-width-trigger" 
+        (click)="isCollapsed = !isCollapsed">
+        <i class="trigger"
+           nz-icon
+           [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        ></i>
+    </div> -->
+</nz-sider>

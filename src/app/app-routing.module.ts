@@ -7,7 +7,9 @@ const routes: Routes = [
     path: 'login',
     component: LogInComponent
   },
-  // { path: '', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) },
+  {
+    path: 'chat', loadChildren: () => import('./features/features.module').then(m => m.FeaturesModule),
+  },
   { path: '', pathMatch: 'full', redirectTo: '/login' },
 ];
 

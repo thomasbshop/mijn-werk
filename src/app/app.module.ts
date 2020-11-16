@@ -10,21 +10,20 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-// import { NzFormControlComponent, NzFormItemComponent, NzFormModule } from 'ng-zorro-antd/form';
 import { PagesModule } from './pages/pages.module';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FeaturesModule } from './features/features.module'
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PagesModule,
+    FeaturesModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule

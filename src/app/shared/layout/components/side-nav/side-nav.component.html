@@ -1,1 +1,55 @@
-<p>side-nav works!</p>
+<nz-sider
+    nzTheme="light"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
+    <div class="ant-layout-sider-children" >
+    <div class="sidebar-logo">
+    <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Ant Design Of Angular</h1>
+    </a>
+    </div>
+    <ul nz-menu nzTheme="light" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+    <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+        <ul>
+        <li nz-menu-item nzMatchRouter>
+            <a routerLink="/welcome">Welcome</a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+            <a>Monitor1</a>
+        </li>
+        <li nz-menu-item nzMatchRouter>
+            <a>Workplace</a>
+        </li>
+        </ul>
+    </li>
+    <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+        <ul>
+        <li nz-menu-item nzMatchRouter>
+            <a>Basic Form</a>
+        </li>
+        </ul>
+    </li>
+    </ul>
+    <ul nz-menu nzMode="inline" class="sider-menu">
+        <li nz-submenu nzOpen nzIcon="user" nzTitle="subnav 1">
+        <ul>
+            <li nz-menu-item nzSelected>option1</li>
+            <li nz-menu-item>option2</li>
+            <li nz-menu-item>option3</li>
+        </ul>
+        </li>
+    </ul>
+    </div>
+    <!-- <div nz-sider-trigger nzTheme="dark" 
+        class="ant-layout-sider-zero-width-trigger" 
+        (click)="isCollapsed = !isCollapsed">
+        <i class="trigger"
+           nz-icon
+           [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        ></i>
+    </div> -->
+</nz-sider>

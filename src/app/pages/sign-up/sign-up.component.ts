@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Observable, Observer } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, Observer, Subscription } from 'rxjs';
+import { AuthenticationService } from 'src/app/core/auth/services/authentication.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,27 +13,69 @@ import { Observable, Observer } from 'rxjs';
 
 
 export class SignUpComponent {
-  validateForm: FormGroup;
 
-  submitForm(value: { userName: string; email: string; password: string; confirm: string; }): void {
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsDirty();
-      this.validateForm.controls[key].updateValueAndValidity();
+  public signupForm!: FormGroup;
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private fb: FormBuilder, 
+    // private alertService: AlertService,
+    private auth: AuthenticationService,
+    // private loadingService: LoadingService,
+    private router: Router) {
+      this.createForm();
+  }
+
+  private createForm(): void {
+    this.signupForm = this.fb.group({
+      userName: ['', [Validators.required], [this.userNameAsyncValidator]],
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required]],
+      confirm: ['', [this.confirmValidator]],
+      agree: [false]
+    });
+  }
+
+  public  submitForm(value: { userName: string; email: string; password: string; confirm: string; }): void {
+    for (const key in this.signupForm.controls) {
+      this.signupForm.controls[key].markAsDirty();
+      this.signupForm.controls[key].updateValueAndValidity();
     }
     console.log(value);
+
+    if (this.signupForm.valid) {
+      const {firstName, lastName, email, password} = this.signupForm.value;
+
+      // TODO call the auth service
+      this.subscriptions.push(
+        this.auth.signup(firstName, lastName, email, password).subscribe(success => {
+          if (success) {
+            this.router.navigate(['/chat']);
+          } else {
+            // const failedSignupAlert = new Alert('There was a problem signing up, try again.', AlertType.Danger);
+            // this.alertService.alerts.next(failedSignupAlert);
+          }
+
+          // this.loadingService.isLoading.next(false);
+        })
+      );
+    } else {
+      // const failedSignupAlert = new Alert('Please enter a valid name, email and password, try again.', AlertType.Danger);
+      // this.alertService.alerts.next(failedSignupAlert);
+    }
   }
 
   resetForm(e: MouseEvent): void {
     e.preventDefault();
-    this.validateForm.reset();
-    for (const key in this.validateForm.controls) {
-      this.validateForm.controls[key].markAsPristine();
-      this.validateForm.controls[key].updateValueAndValidity();
+    this.signupForm.reset();
+    for (const key in this.signupForm.controls) {
+      this.signupForm.controls[key].markAsPristine();
+      this.signupForm.controls[key].updateValueAndValidity();
     }
   }
 
   validateConfirmPassword(): void {
-    setTimeout(() => this.validateForm.controls.confirm.updateValueAndValidity());
+    setTimeout(() => this.signupForm.controls.confirm.updateValueAndValidity());
   }
 
   userNameAsyncValidator = (control: FormControl) =>
@@ -45,24 +89,22 @@ export class SignUpComponent {
         }
         observer.complete();
       }, 1000);
-    });
+  });
 
   confirmValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { error: true, required: true };
-    } else if (control.value !== this.validateForm.controls.password.value) {
+    } else if (control.value !== this.signupForm.controls.password.value) {
       return { confirm: true, error: true };
     }
     return {};
   };
 
-  constructor(private fb: FormBuilder) {
-    this.validateForm = this.fb.group({
-      userName: ['', [Validators.required], [this.userNameAsyncValidator]],
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required]],
-      confirm: ['', [this.confirmValidator]],
-      agree: [false]
-    });
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }

@@ -11,6 +11,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 
@@ -26,7 +27,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     NzCheckboxModule,
     NzSelectModule,
     NzSpinModule,
-    NzCardModule
+    NzCardModule,
+    NzAlertModule
   ]
 })
 export class PagesModule { }

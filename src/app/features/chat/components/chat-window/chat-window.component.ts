@@ -15,9 +15,42 @@ interface ItemData {
   styleUrls: ['./chat-window.component.scss']
 })
 export class ChatWindowComponent implements OnInit {
-  data: ItemData[] = [];
 
   constructor() { }
+
+    // tslint:disable-next-line:no-any
+  data: any[] = [];
+  submitting = false;
+  user = {
+    author: 'Han Solo',
+    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+  };
+  inputValue = '';
+  
+  handleSubmit(): void {
+    this.submitting = true;
+    const content = this.inputValue;
+    this.inputValue = '';
+    setTimeout(() => {
+      this.submitting = false;
+      this.data = [
+        ...this.data,
+        {
+          ...this.user,
+          content: content,
+          datetime: new Date(),
+          displayTime: formatDistance(new Date(), new Date())
+        }
+      ].map(e => {
+        return {
+          ...e,
+          // displayTime: formatDistance(new Date(), e.datetime)
+        };
+      });
+    }, 400);
+  }
+
+
 
   likes = 0;
   dislikes = 0;

@@ -12,18 +12,26 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [ChatComponent, ChatInputComponent, ChannelsComponent, ChatMessageComponent, ChatWindowComponent ],
   imports: [
     CommonModule,
+    FormsModule,
     NzLayoutModule,
     NzCommentModule,
     NzListModule,
     NzAvatarModule,
     NzToolTipModule,
     NzIconModule,
+    NzFormModule,
+    NzButtonModule,
+    NzInputModule,
     LayoutModule
   ],
   exports: [ChatWindowComponent]

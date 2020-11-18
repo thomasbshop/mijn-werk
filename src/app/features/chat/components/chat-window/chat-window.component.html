@@ -31,6 +31,20 @@
             </nz-comment>
             </nz-list-item>
           </nz-list>
+
+          <nz-comment>
+            <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+            <nz-comment-content>
+              <nz-form-item>
+                <textarea nz-input [(ngModel)]="inputValue" rows="4"></textarea>
+              </nz-form-item>
+              <nz-form-item>
+                <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
+                  Add Comment
+                </button>
+              </nz-form-item>
+            </nz-comment-content>
+          </nz-comment>
           
           <!-- <ng-template #noMessages>
             <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">

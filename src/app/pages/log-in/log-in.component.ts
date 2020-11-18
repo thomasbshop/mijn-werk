@@ -8,23 +8,49 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LogInComponent implements OnInit {
 
-  validateForm!: FormGroup;
+  loginForm!: FormGroup;
+  isLoading = false;
 
   submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
+    for (const i in this.loginForm.controls) {
+      this.loginForm.controls[i].markAsDirty();
+      this.loginForm.controls[i].updateValueAndValidity();
+    }
+
+    if (this.loginForm.valid) {
+      // this.isLoading = !isLoading;
+      const {email, password} = this.loginForm.value;
+      console.log(this.loginForm)
+      // // TODO call the auth service
+      // this.subscriptions.push(
+      //   this.auth.login(email, password).subscribe(success => {
+      //     if (success) {
+      //       this.router.navigateByUrl(this.returnUrl);
+      //     } else {
+      //       this.displayFailedLogin();
+      //     }
+      //     this.loadingService.isLoading.next(false);
+      //   })
+      // );
+    } else {
+      // this.isLoading = !isLoading;
+      // this.displayFailedLogin();
     }
   }
+
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
+    this.loginForm = this.fb.group({
       userName: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [true]
     });
   }
 
+  // private displayFailedLogin(): void {
+  //   const failedLoginAlert = new Alert('Invalid email/password combination, try again.', AlertType.Danger);
+  //   this.alertService.alerts.next(failedLoginAlert);
+  // }
 }

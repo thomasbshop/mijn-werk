@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 
@@ -24,6 +25,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     NzButtonModule,
     NzCheckboxModule,
     NzSelectModule,
+    NzSpinModule,
     NzCardModule
   ]
 })

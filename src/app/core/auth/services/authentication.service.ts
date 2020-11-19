@@ -79,7 +79,8 @@ export class AuthenticationService {
         .then((user) => true)
         .catch(error => {
           console.log(error)
-          throw error
+          // throw error
+          return error;
         })
     );
   }

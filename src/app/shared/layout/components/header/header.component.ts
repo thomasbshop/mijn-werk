@@ -8,11 +8,15 @@ import { AuthenticationService } from 'src/app/core/auth/services/authentication
 })
 export class HeaderComponent implements OnInit {
 
+  public currentUser: any = null;
+
   constructor(
     public auth: AuthenticationService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.auth.currentUser.subscribe( user => {
+      this.currentUser = user;
+    })
   }
-
 }

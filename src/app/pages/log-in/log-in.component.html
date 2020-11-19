@@ -5,9 +5,9 @@
                 <nz-spin [nzSpinning]="isLoading" [nzSize]="'large'">
                 <form nz-form [formGroup]="loginForm" class="login-form" (ngSubmit)="submitForm()">
                     <nz-form-item>
-                    <nz-form-control nzErrorTip="Please input your username!">
+                    <nz-form-control nzErrorTip="Please input your E-mail!">
                     <nz-input-group nzPrefixIcon="user">
-                        <input type="text" nz-input formControlName="userName" placeholder="Username" />
+                        <input type="email" nz-input formControlName="email" placeholder="E-mail" />
                     </nz-input-group>
                     </nz-form-control>
                     </nz-form-item>

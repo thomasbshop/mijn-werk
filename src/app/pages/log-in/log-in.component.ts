@@ -23,7 +23,7 @@ export class LogInComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/chat';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'app/chat';
     this.createForm();
    }
 
@@ -31,36 +31,39 @@ export class LogInComponent implements OnInit, OnDestroy {
   
   createForm(): void {
     this.loginForm = this.fb.group({
-      userName: [null, [Validators.required]],
+      email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
-      remember: [true]
+      remember: [false]
     });
   }
 
   submitForm(): void {
-    for (const i in this.loginForm.controls) {
-      this.loginForm.controls[i].markAsDirty();
-      this.loginForm.controls[i].updateValueAndValidity();
-    }
 
     if (this.loginForm.valid) {
-      // this.isLoading = !isLoading;
+      this.isLoading = !this.isLoading;
       const {email, password} = this.loginForm.value;
       console.log(this.loginForm)
       // TODO call the auth service
       this.subscriptions.push(
-        this.auth.login(email, password).subscribe(success => {
-          if (success) {
+        this.auth.login(email, password).subscribe(result => {
+          if (result) {
+            console.log(result);
             this.router.navigateByUrl(this.returnUrl);
+            console.log(this.returnUrl);
           } else {
-            this.displayFailedLogin();
+            console.log(result);
+            // this.displayFailedLogin();
           }
           this.isLoading = !this.isLoading;
         })
       );
     } else {
-      // this.isLoading = !isLoading;
       // this.displayFailedLogin();
+    }
+
+    for (const i in this.loginForm.controls) {
+      this.loginForm.controls[i].markAsDirty();
+      this.loginForm.controls[i].updateValueAndValidity();
     }
   }
 

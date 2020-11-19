@@ -1,10 +1,21 @@
 <nz-header>
   <div class="logo"></div>
-  <ul nz-menu nzTheme="light" nzMode="horizontal">
+  <ul nz-menu nzTheme="light" nzMode="horizontal" *ngIf="currentUser else loggedOut">
     <li nz-menu-item>nav 1</li>
     <li nz-menu-item>nav 2</li>
     <li nz-menu-item>
-      <!-- <a (click)='auth.logout()'>logout</a> -->
+      <a (click)='auth.logout()'>logout</a>
     </li>
   </ul>
 </nz-header>
+
+<ng-template #loggedOut>
+  <ul nz-menu nzTheme="light" nzMode="horizontal">
+    <li nz-menu-item>
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+    </li>
+    <li nz-menu-item>
+      <a routerLink="/signup" routerLinkActive="active">Sign Up</a>
+    </li>
+  </ul>
+</ng-template>

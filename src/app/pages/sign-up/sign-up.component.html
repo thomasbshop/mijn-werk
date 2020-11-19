@@ -3,6 +3,18 @@
         <nz-card style="top: 50%; transform: translateY(40%);">
             <form nz-form [formGroup]="signupForm" (ngSubmit)="submitForm(signupForm.value)">
                 <nz-form-item>
+                    <nz-form-label [nzSpan]="7" nzRequired nzFor="firstName">First Name</nz-form-label>
+                    <nz-form-control [nzSpan]="12" nzErrorTip="Please input your name">
+                      <input type="text" nz-input formControlName="firstName" placeholder="Please input your first name" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="7" nzRequired nzFor="lastName">Last Name</nz-form-label>
+                    <nz-form-control [nzSpan]="12" nzErrorTip="Please input your name">
+                      <input type="text" nz-input formControlName="lastName" placeholder="Please input your last name" />
+                    </nz-form-control>
+                  </nz-form-item>
+                <nz-form-item>
                     <nz-form-label [nzSpan]="7" nzRequired>Username</nz-form-label>
                     <nz-form-control [nzSpan]="12" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
                     <input nz-input formControlName="userName" placeholder="Input desired username." />

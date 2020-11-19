@@ -37,14 +37,10 @@ export class SignUpComponent {
   }
 
   public  submitForm(value: { userName: string; email: string; password: string; confirm: string; }): void {
-    for (const key in this.signupForm.controls) {
-      this.signupForm.controls[key].markAsDirty();
-      this.signupForm.controls[key].updateValueAndValidity();
-    }
-    console.log(value);
 
     if (this.signupForm.valid) {
       const {firstName, lastName, email, password} = this.signupForm.value;
+      console.log(value);
 
       // TODO call the auth service
       this.subscriptions.push(
@@ -54,6 +50,7 @@ export class SignUpComponent {
           } else {
             // const failedSignupAlert = new Alert('There was a problem signing up, try again.', AlertType.Danger);
             // this.alertService.alerts.next(failedSignupAlert);
+            console.log('error');
           }
 
           // this.loadingService.isLoading.next(false);
@@ -62,6 +59,12 @@ export class SignUpComponent {
     } else {
       // const failedSignupAlert = new Alert('Please enter a valid name, email and password, try again.', AlertType.Danger);
       // this.alertService.alerts.next(failedSignupAlert);
+      console.log('form not valid', this.signupForm);
+    }
+
+    for (const key in this.signupForm.controls) {
+      this.signupForm.controls[key].markAsDirty();
+      this.signupForm.controls[key].updateValueAndValidity();
     }
   }
 

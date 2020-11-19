@@ -6,6 +6,8 @@ import { ChatModule } from './chat/chat.module'
 import { ChatComponent } from './chat/chat.component'
 import { ChatWindowComponent } from './chat/components/chat-window/chat-window.component'
 import { FeaturesRoutingModule } from './features-routing.module';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { UserModule } from './user/user.module';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { FeaturesRoutingModule } from './features-routing.module';
     FeaturesRoutingModule,
     ChatModule,
     LayoutModule,
-    NzLayoutModule
+    NzInputModule,
+    NzLayoutModule,
+    UserModule
   ]
 })
 export class FeaturesModule { }

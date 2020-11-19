@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "mijn-werk": {
+      "hosting": {
+        "mijn-werk": [
+          "mijn-werk"
+        ]
+      }
+    }
+  }
+}

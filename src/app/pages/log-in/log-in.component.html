@@ -1,4 +1,6 @@
-    <nz-alert nzType="error" nzCloseable nzMessage="Error" nzShowIcon (nzOnClose)="afterClose()"></nz-alert>
+    <nz-alert nzType="error" nzCloseable nzMessage="Error" 
+    nzDescription="{{alertMessage}}"
+    nzShowIcon (nzOnClose)="afterClose()" *ngIf="alertMessage"></nz-alert>
     <div nz-row nzJustify="space-around" nzAlign="middle">
         <div nz-col nzSpan="4">
             <nz-card style="top: 50%; transform: translateY(80%);">

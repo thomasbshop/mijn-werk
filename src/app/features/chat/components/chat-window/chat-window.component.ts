@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { formatDistance } from 'date-fns';
+import { Observable, Subscription } from 'rxjs';
+import { ChannelService } from '../../services/channel.service';
 
 interface ItemData {
   href: string;
@@ -14,9 +17,30 @@ interface ItemData {
   templateUrl: './chat-window.component.html',
   styleUrls: ['./chat-window.component.scss']
 })
-export class ChatWindowComponent implements OnInit {
+export class ChatWindowComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  private subscriptions: Subscription[] = [];
+  public channel?: Observable<any>;
+  public messages?: Observable<any>;
+  public newMessageText: string = '';
+
+  constructor(
+    private route: ActivatedRoute,
+    private channelService: ChannelService
+  ) { 
+    this.subscriptions.push(
+      this.channelService.selectedChannel.subscribe(channel => {
+        this.channel = channel;
+      })
+    );
+
+    this.subscriptions.push(
+      this.channelService.selectedChannelMessages.subscribe(messages => {
+        this.messages = messages;
+        console.log(this.messages);
+      })
+    );
+  }
 
     // tslint:disable-next-line:no-any
   data: any[] = [];
@@ -25,32 +49,6 @@ export class ChatWindowComponent implements OnInit {
     author: 'Han Solo',
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
   };
-  inputValue = '';
-  
-  handleSubmit(): void {
-    this.submitting = true;
-    const content = this.inputValue;
-    this.inputValue = '';
-    setTimeout(() => {
-      this.submitting = false;
-      this.data = [
-        ...this.data,
-        {
-          ...this.user,
-          content: content,
-          datetime: new Date(),
-          displayTime: formatDistance(new Date(), new Date())
-        }
-      ].map(e => {
-        return {
-          ...e,
-          // displayTime: formatDistance(new Date(), e.datetime)
-        };
-      });
-    }, 400);
-  }
-
-
 
   likes = 0;
   dislikes = 0;
@@ -66,7 +64,7 @@ export class ChatWindowComponent implements OnInit {
     this.dislikes = 1;
   }
 
-
+  loadMessages() {}
   loadData(pi: number): void {
     this.data = new Array(5).fill({}).map((_, index) => {
       return {
@@ -81,8 +79,33 @@ export class ChatWindowComponent implements OnInit {
     });
   }
 
+  onClick(): void {
+    console.log('clicked');
+  }
+
+
+
+  public newMessage(message: string): void {
+    this.submitting = true;
+    console.log(typeof(message));
+    this.channelService.addMessage(message);
+    this.submitting = false;
+    // reset input
+    this.newMessageText = '';
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   ngOnInit(): void {
     this.loadData(1);
+    this.subscriptions.push(
+      this.route.paramMap.subscribe(params => {
+        const channelId = params.get('channelId');
+        this.channelService.changeChannel.next(channelId);
+      })
+    );
   }
 
 }

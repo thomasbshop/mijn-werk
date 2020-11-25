@@ -16,7 +16,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 export class AuthenticationService {
 
   public currentUser: Observable<any>;
-  // public currentUserSnapshot: User | null;
+  public currentUserSnapshot?: User | null;
 
   constructor(
     private router: Router,
@@ -32,7 +32,7 @@ export class AuthenticationService {
           }
         })
       );
-      // this.setCurrentUserSnapshot();
+      this.setCurrentUserSnapshot();
   }
 
   public signup(firstName: string, lastName: string, email: string, password: string): Observable<boolean> {
@@ -63,17 +63,7 @@ export class AuthenticationService {
     );
   }
 
-  //   // Sign up with email/password
-  // public signup (firstName: string, lastName: string, email: string, password: string) {
-  //     return this.afAuth.createUserWithEmailAndPassword(email, password)
-  //       .then((result) => {
-  //         console.log(result)
-  //       }).catch((error) => {
-  //         window.alert(error.message)
-  //       })
-  // }
-
-  public login(email: string, password: string): Observable<boolean> {
+  public login(email: string, password: string): Observable<any> {
     return fromPromise(
       this.afAuth.signInWithEmailAndPassword(email, password)
         .then((user) => true)
@@ -92,9 +82,9 @@ export class AuthenticationService {
     });
   }
 
-  // private setCurrentUserSnapshot(): void {
-  //   this.currentUser.subscribe(user => this.currentUserSnapshot = user);
-  // }
+  private setCurrentUserSnapshot(): void {
+    this.currentUser.subscribe(user => this.currentUserSnapshot = user);
+  }
 
 
 }

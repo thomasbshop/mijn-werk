@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChannelService } from './services/channel.service';
 
 @Component({
   selector: 'app-chat',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  channels: Array<any> = ['#1', '#2', '#3']
-  constructor() { }
+
+  constructor(
+    public channelService: ChannelService
+  ) { }
 
   ngOnInit(): void {
   }

@@ -3,7 +3,7 @@
   </app-header>
   <nz-content>
     <nz-layout class="inner-layout">
-      <app-side-nav [menuOptions] = "channels">
+      <app-side-nav [menuOptions] = "channelService.channels | async">
       </app-side-nav>
       <nz-layout class="right-layout">
         <app-chat-window></app-chat-window>

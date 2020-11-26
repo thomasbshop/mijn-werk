@@ -1,39 +1,47 @@
-.layout {
-  min-height: 100vh;
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 28px 16px 0;
+  float: left;
 }
 
-.right-layout {
-    margin-left: 256px;
-}
-
-:host {
-  display: flex;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.app-layout {
-  height: 100vh;
-}
-
-app-side-nav {
-  margin: 64px 16px 0;
-  overflow: initial;
-} 
-
-app-chat-window {
-  margin: 64px 16px 0;
-  overflow: initial;
-}
-
-app-side-nav {
-  overflow: auto; // makes the trigger disappear.
+.outer-content {
+  // margin-top: 64px;
+  width: 75%;
+  margin: 64px auto 0;
+  padding: 0 50px;
   height: 100%;
-  position: fixed;
-  left: 0;
 }
- 
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-layout {
+  max-height: 80vh;
+  min-height: 80vh;
+  padding: 4px 0;
+  background: #fff;
+  height: 100%;
+}
+
+nz-sider {
+  overflow: auto;
+  position: static;
+}
+
+.sider-menu {
+  height: 100%;
+}
+
+.inner-content {
+  overflow: auto;
+  text-align: center;
+  padding: 0 24px;
+  min-height: 280px;
+}
+
 nz-footer {
   text-align: center;
 }

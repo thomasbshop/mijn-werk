@@ -4,6 +4,7 @@
           nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
           [nzNotFoundContent]="contentTpl"
           [nzNotFoundFooter]="footerTpl"
+          style="top: 50%; transform: translateY(80%);"
           >
             <ng-template #contentTpl>
               <span> Select a channel. </span>
@@ -15,7 +16,7 @@
         </ng-container>
 
         <ng-template #chatMessages> 
-          <h3 [ngStyle]="{ margin: '16px 0' }">{{ channel.name }}</h3>
+          <h3 [ngStyle]="{ margin: '8px 0' }">{{ channel.name }}</h3>
           <nz-divider></nz-divider>
           <nz-list *ngIf="messages.length" [nzItemLayout]="'horizontal'">
             <ng-container *ngFor="let message of messages">

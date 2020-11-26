@@ -4,6 +4,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { RouterModule } from '@angular/router';
+import { from } from 'rxjs';
 
 
 
@@ -11,8 +14,10 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
   declarations: [HeaderComponent, SideNavComponent],
   imports: [
     CommonModule,
+    RouterModule,
     NzLayoutModule,
-    NzMenuModule
+    NzMenuModule,
+    NzAvatarModule
   ],
   exports: [HeaderComponent, SideNavComponent]
 })

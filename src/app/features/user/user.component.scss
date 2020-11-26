@@ -6,6 +6,16 @@
   float: left;
 }
 
+nz-header {
+  position: fixed;
+  width: 100%;
+  padding: 0 60px;
+}
+
+.header-menu {
+  line-height: 64px;
+}
+
 .outer-content {
   // margin-top: 64px;
   width: 75%;
@@ -21,7 +31,7 @@ nz-breadcrumb {
 .inner-layout {
   max-height: 80vh;
   min-height: 80vh;
-  padding: 4px 0;
+  padding: 24px 0;
   background: #fff;
   height: 100%;
 }
@@ -37,7 +47,8 @@ nz-sider {
 
 .inner-content {
   overflow: auto;
-  // text-align: center;
+  text-align: center;
+  // margin-left: 250px;
   padding: 0 24px;
   min-height: 280px;
 }

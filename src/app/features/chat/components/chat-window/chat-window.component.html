@@ -1,23 +1,29 @@
-<nz-content>
     <div class="inner-content">
-          <!-- <div class="h-100 d-flex flex-column chat-window">
-            <ng-container *ngIf="!chatroom else chatMessages">
-              <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">
-                <div class="select-room-message">
-                  Select a Room
-                </div>
-              </div>
-            </ng-container>
-          </div> -->
-          
-          <nz-list nzItemLayout="vertical">
-            <nz-list-item *ngFor="let item of data">
-            <nz-comment nzAuthor="Han Solo" [nzDatetime]="time">
+        <ng-container *ngIf="!channel else chatMessages">
+          <nz-empty
+          nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          [nzNotFoundContent]="contentTpl"
+          [nzNotFoundFooter]="footerTpl"
+          style="top: 50%; transform: translateY(80%);"
+          >
+            <ng-template #contentTpl>
+              <span> Select a channel. </span>
+            </ng-template>
+            <ng-template #footerTpl>
+              <button nz-button nzType="primary" (click)="onClick()">Create Now</button>
+            </ng-template>
+          </nz-empty>
+        </ng-container>
+
+        <ng-template #chatMessages> 
+          <h3 [ngStyle]="{ margin: '8px 0' }">{{ channel.name }}</h3>
+          <nz-divider></nz-divider>
+          <nz-list *ngIf="messages.length" [nzItemLayout]="'horizontal'">
+            <ng-container *ngFor="let message of messages">
+              <nz-comment nzAuthor="{{message.sender.id}}" [nzDatetime]="message.createdAt.toDate() | date: 'short':'UTC'">
                 <nz-avatar nz-comment-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
                 <nz-comment-content>
-                  <p>
-                    {{ item.content }}
-                  </p>
+                  <p>{{ message.message }}</p>
                 </nz-comment-content>
                 <nz-comment-action>
                   <i nz-tooltip nzTitle="Like" nz-icon nzType="like" [nzTheme]="likes > 0 ? 'twotone' : 'outline'" (click)="like()"></i>
@@ -28,30 +34,31 @@
                   <span class="count dislike">{{ dislikes }}</span>
                 </nz-comment-action>
                 <nz-comment-action>Reply to</nz-comment-action>
-            </nz-comment>
-            </nz-list-item>
+              </nz-comment>
+            </ng-container>
           </nz-list>
-
           <nz-comment>
             <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
             <nz-comment-content>
               <nz-form-item>
-                <textarea nz-input [(ngModel)]="inputValue" rows="4"></textarea>
+                <textarea [(ngModel)]="newMessageText" nz-input rows="4"></textarea>
               </nz-form-item>
               <nz-form-item>
-                <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!inputValue" (click)="handleSubmit()">
+                <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!newMessageText" (click)="newMessage(newMessageText)">
                   Add Comment
                 </button>
               </nz-form-item>
             </nz-comment-content>
           </nz-comment>
-          
-          <!-- <ng-template #noMessages>
-            <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">
-              <div class="select-room-message">
-                No Messages
-              </div>
+        </ng-template>  
+
+    </div>
+
+        
+        <!-- <ng-template #noMessages>
+          <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">
+            <div class="select-room-message">
+              No Messages
             </div>
-          </ng-template> -->
-        </div>
-</nz-content>
+          </div>
+        </ng-template> -->

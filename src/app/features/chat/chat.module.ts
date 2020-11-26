@@ -7,6 +7,7 @@ import { ChatWindowComponent } from './components/chat-window/chat-window.compon
 import { ChatComponent } from './chat.component';
 import { LayoutModule } from '../../shared/layout/layout.module'
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -15,7 +16,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { FormsModule } from '@angular/forms';
+import { ChannelService } from './services/channel.service';
 
 
 @NgModule({
@@ -24,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     NzLayoutModule,
+    NzEmptyModule,
     NzCommentModule,
     NzListModule,
     NzAvatarModule,
@@ -32,7 +38,13 @@ import { FormsModule } from '@angular/forms';
     NzFormModule,
     NzButtonModule,
     NzInputModule,
+    NzDividerModule,
+    NzBreadCrumbModule,
+    NzMenuModule,
     LayoutModule
+  ],
+  providers: [
+    ChannelService
   ],
   exports: [ChatWindowComponent]
 })

@@ -23,11 +23,12 @@ export class LogInComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'app/chat';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/app/chat';
     this.createForm();
    }
 
   isLoading = false;
+  alertMessage?: string
   
   createForm(): void {
     this.loginForm = this.fb.group({
@@ -48,10 +49,11 @@ export class LogInComponent implements OnInit, OnDestroy {
         this.auth.login(email, password).subscribe(result => {
           if (result) {
             console.log(result);
-            this.router.navigateByUrl(this.returnUrl);
             console.log(this.returnUrl);
+            this.router.navigateByUrl(this.returnUrl);
           } else {
             console.log(result);
+            this.alertMessage = result.message;
             // this.displayFailedLogin();
           }
           this.isLoading = !this.isLoading;
@@ -68,11 +70,11 @@ export class LogInComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
+    this.auth.logout();
   }
 
   ngOnDestroy() {
-    // this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
   afterClose(): void {
     console.log('close');

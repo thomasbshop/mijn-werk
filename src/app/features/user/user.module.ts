@@ -4,7 +4,8 @@ import { UserComponent } from './user.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { LayoutModule } from 'src/app/shared/layout/layout.module';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb'
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -16,6 +17,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     CommonModule,
     NzLayoutModule,
     LayoutModule,
+    NzPageHeaderModule,
     NzBreadCrumbModule,
     NzDescriptionsModule,
     NzDividerModule,

@@ -45,14 +45,14 @@ export class ChannelService {
   }
 
   public addMessage(text: string): void {
-    const chatroomId = this.changeChannel.value;
-    console.log(chatroomId);
+    const channelId = this.changeChannel.value;
+    console.log(channelId);
     const message = {
       message: text,
       createdAt: new Date(),
-      sender: this.authService.currentUserSnapshot?.id
+      sender: this.authService.currentUserSnapshot
     };
     console.log(message);
-    this.db.collection(`chatrooms/${chatroomId}/messages`).add(message);
+    this.db.collection(`channel/${channelId}/messages`).add(message);
   }
 }

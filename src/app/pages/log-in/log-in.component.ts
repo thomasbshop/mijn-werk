@@ -28,7 +28,7 @@ export class LogInComponent implements OnInit, OnDestroy {
    }
 
   isLoading = false;
-  alertMessage?: string
+  alertMessage?: any
   
   createForm(): void {
     this.loginForm = this.fb.group({
@@ -39,7 +39,6 @@ export class LogInComponent implements OnInit, OnDestroy {
   }
 
   submitForm(): void {
-
     if (this.loginForm.valid) {
       this.isLoading = !this.isLoading;
       const {email, password} = this.loginForm.value;
@@ -47,19 +46,19 @@ export class LogInComponent implements OnInit, OnDestroy {
       // TODO call the auth service
       this.subscriptions.push(
         this.auth.login(email, password).subscribe(result => {
-          if (result) {
+          if (result === true) {
             console.log(result);
             console.log(this.returnUrl);
             this.router.navigateByUrl(this.returnUrl);
           } else {
             console.log(result);
             this.alertMessage = result.message;
-            // this.displayFailedLogin();
           }
           this.isLoading = !this.isLoading;
         })
       );
     } else {
+      console.log(this.alertMessage);
       // this.displayFailedLogin();
     }
 

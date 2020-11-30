@@ -14,12 +14,12 @@
   height: 100%;
 }
 
-nz-breadcrumb {
-  margin: 16px 0;
+nz-page-header{
+  padding: 8px 24px;
 }
 
-nz-page-header {
-  padding: 8px 24px;
+nz-breadcrumb {
+  margin: 16px 0;
 }
 
 .inner-layout {
@@ -30,9 +30,14 @@ nz-page-header {
   height: 100%;
 }
 
-nz-sider {
+app-side-nav {
+  flex: 0 0 250px;
+  max-width: 250px;
+  min-width: 250px;
+  width: 250px;
   overflow: auto;
   position: static;
+  height: 100%;
 }
 
 .sider-menu {
@@ -41,7 +46,7 @@ nz-sider {
 
 .inner-content {
   overflow: auto;
-  // text-align: center;
+  text-align: center;
   padding: 0 24px;
   min-height: 280px;
 }

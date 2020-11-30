@@ -17,6 +17,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { FormsModule } from '@angular/forms';
@@ -40,6 +41,7 @@ import { ChannelService } from './services/channel.service';
     NzInputModule,
     NzDividerModule,
     NzBreadCrumbModule,
+    NzPageHeaderModule,
     NzMenuModule,
     LayoutModule
   ],

@@ -1,16 +1,21 @@
 <nz-header>
     <div style="width: 75%; margin: 0px auto;">
-      <div class="logo"></div>
+      <div nzAlign="center" style="width: 250px; flex: none;">
+        <div class="logo"></div>
+      </div>
       <ul nz-menu nzTheme="dark" nzMode="horizontal"
+        [nzSelectable]="false"
         class="header-menu"
         *ngIf="currentUser else loggedOut">
-          <li nz-menu-item>nav 1</li>
-          <li nz-menu-item>
-            <a routerLink="/app/user/{{currentUser.id}}" routerLinkActive="active">Profile</a>
+          <li nz-submenu [nzTitle]="profileAvatar" style="float: right; padding: 0 60px 0 0;">
+            <ul>
+              <li nz-menu-item>
+                <a routerLink="/app/user/{{currentUser.id}}" routerLinkActive="active">Profile</a>
+              </li>
+              <li nz-menu-item><a (click)='auth.logout()'>Log out</a></li>
+            </ul>
           </li>
-          <li nz-menu-item>
-            <a (click)='auth.logout()'>logout</a>
-          </li>
+          <ng-template #profileAvatar><nz-avatar nzIcon="user"></nz-avatar></ng-template>
       </ul>
     </div>
 </nz-header>

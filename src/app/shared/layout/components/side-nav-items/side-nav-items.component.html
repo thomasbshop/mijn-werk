@@ -1,0 +1,15 @@
+
+    <ul nz-menu nzMode="inline" class="sider-menu">
+      <li nz-submenu nzOpen="true" nzIcon="notification" nzTitle="Channels">
+        <ul>
+            <li nz-menu-item>
+                <a>#new</a>
+            </li>
+        </ul>
+        <ul *ngIf="menuOptions">
+            <li nz-menu-item *ngFor="let option of menuOptions" >
+                <a [routerLink]="['/app/chat', option.id]">#{{ option.name }}</a>
+            </li>
+        </ul>
+      </li>
+    </ul>

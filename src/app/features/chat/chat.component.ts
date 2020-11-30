@@ -7,6 +7,10 @@ import { ChannelService } from './services/channel.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+<<<<<<< Updated upstream
+=======
+  // channels: Array<any> = []
+>>>>>>> Stashed changes
 
   constructor(
     public channelService: ChannelService

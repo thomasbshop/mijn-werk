@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core/auth/services/authentication.service';
 
 @Injectable({
@@ -34,8 +34,8 @@ export class ChannelService {
             return db.collection(`/channel/${channelId}/messages/`, ref => {
               return ref.orderBy('createdAt', 'desc').limit(100);
             })
-            .valueChanges();
-            // .map(arr => arr.reverse());
+            .valueChanges()
+            .pipe(map(arr => arr.reverse()));
           }
           return observableOf(null);
         })

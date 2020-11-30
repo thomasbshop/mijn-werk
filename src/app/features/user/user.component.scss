@@ -30,9 +30,14 @@ nz-breadcrumb {
   height: 100%;
 }
 
-nz-sider {
+app-side-nav {
+  flex: 0 0 250px;
+  max-width: 250px;
+  min-width: 250px;
+  width: 250px;
   overflow: auto;
   position: static;
+  height: 100%;
 }
 
 .sider-menu {

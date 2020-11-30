@@ -20,7 +20,7 @@
           <nz-divider></nz-divider>
           <nz-list *ngIf="messages.length" [nzItemLayout]="'horizontal'">
             <ng-container *ngFor="let message of messages">
-              <nz-comment nzAuthor="{{message.sender.id}}" [nzDatetime]="message.createdAt.toDate() | date: 'short':'UTC'">
+              <nz-comment nzAuthor="{{message.sender.firstName}} {{message.sender.lastName}}" [nzDatetime]="message.createdAt.toDate() | date: 'short':'UTC'">
                 <nz-avatar nz-comment-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
                 <nz-comment-content>
                   <p>{{ message.message }}</p>

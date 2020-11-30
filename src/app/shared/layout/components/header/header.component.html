@@ -12,7 +12,7 @@
               <li nz-menu-item>
                 <a routerLink="/app/user/{{currentUser.id}}" routerLinkActive="active">Profile</a>
               </li>
-              <li nz-menu-item><a (click)='auth.logout()'>logout</a></li>
+              <li nz-menu-item><a (click)='auth.logout()'>Log out</a></li>
             </ul>
           </li>
           <ng-template #profileAvatar><nz-avatar nzIcon="user"></nz-avatar></ng-template>

@@ -6,12 +6,12 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { RouterModule } from '@angular/router';
-import { from } from 'rxjs';
+import { SideNavItemsComponent } from './components/side-nav-items/side-nav-items.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, SideNavComponent],
+  declarations: [HeaderComponent, SideNavComponent, SideNavItemsComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -19,6 +19,6 @@ import { from } from 'rxjs';
     NzMenuModule,
     NzAvatarModule
   ],
-  exports: [HeaderComponent, SideNavComponent]
+  exports: [HeaderComponent, SideNavComponent, SideNavItemsComponent]
 })
 export class LayoutModule { }

@@ -1,11 +1,10 @@
-nz-content {
-    margin: 64px 16px 0;
-    overflow: initial;
-  }
+nz-list {
+  // overflow-y: scroll;
+}
   
-  .inner-content {
-    padding: 12px;
-    background: #fff;
-    // text-align: center;
-    // height: 100%;
-  }
+.inner-content {
+  padding: 12px;
+  background: #fff;
+  // text-align: center;
+  // height: 100%;
+}

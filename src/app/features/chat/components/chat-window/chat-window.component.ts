@@ -37,7 +37,6 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.channelService.selectedChannelMessages.subscribe(messages => {
         this.messages = messages;
-        console.log(this.messages);
       })
     );
   }
@@ -55,13 +54,13 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
   time = formatDistance(new Date(), new Date());
 
   like(): void {
-    this.likes = 1;
-    this.dislikes = 0;
+    // this.likes = 1;
+    // this.dislikes = 0;
   }
 
   dislike(): void {
-    this.likes = 0;
-    this.dislikes = 1;
+    // this.likes = 0;
+    // this.dislikes = 1;
   }
 
   loadMessages() {}
@@ -83,11 +82,8 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
     console.log('clicked');
   }
 
-
-
   public newMessage(message: string): void {
     this.submitting = true;
-    console.log(typeof(message));
     this.channelService.addMessage(message);
     this.submitting = false;
     // reset input

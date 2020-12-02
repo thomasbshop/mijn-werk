@@ -18,7 +18,7 @@
         <ng-template #chatMessages> 
           <h3 [ngStyle]="{ margin: '8px 0' }">{{ channel.name }}</h3>
           <nz-divider></nz-divider>
-          <nz-list *ngIf="messages.length" [nzItemLayout]="'horizontal'">
+          <nz-list *ngIf="messages.length else noMessages" [nzItemLayout]="'horizontal'">
             <ng-container *ngFor="let message of messages">
               <nz-comment nzAuthor="{{message.sender.firstName}} {{message.sender.lastName}}" [nzDatetime]="message.createdAt.toDate() | date: 'short':'UTC'">
                 <nz-avatar nz-comment-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
@@ -41,7 +41,7 @@
             <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
             <nz-comment-content>
               <nz-form-item>
-                <textarea [(ngModel)]="newMessageText" nz-input rows="4"></textarea>
+                <textarea [(ngModel)]="newMessageText" nz-input rows="3"></textarea>
               </nz-form-item>
               <nz-form-item>
                 <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!newMessageText" (click)="newMessage(newMessageText)">
@@ -55,10 +55,10 @@
     </div>
 
         
-        <!-- <ng-template #noMessages>
+        <ng-template #noMessages>
           <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">
             <div class="select-room-message">
               No Messages
             </div>
           </div>
-        </ng-template> -->
+        </ng-template>

@@ -2,14 +2,52 @@
     <ul nz-menu nzMode="inline" class="sider-menu">
       <li nz-submenu nzOpen="true" nzIcon="notification" nzTitle="Channels">
         <ul>
-            <li nz-menu-item>
-                <a>#new</a>
+            <li style="padding-left: 48px;">
+                <button nz-button nzType="dashed" (click)="addChannel()"><i nz-icon nzType="plus"></i>Add channel</button>
             </li>
         </ul>
         <ul *ngIf="menuOptions">
             <li nz-menu-item *ngFor="let option of menuOptions" >
-                <a [routerLink]="['/app/chat', option.id]">#{{ option.name }}</a>
+                <a [routerLink]="['/app/chat', option.id]"># {{ option.name }}</a>
             </li>
         </ul>
       </li>
     </ul>
+
+    <nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Add Channel"
+    (nzOnCancel)="handleCancel()"
+    [nzFooter]="modalFooter"
+    >
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+            <nz-form-item>
+            <nz-form-label [nzSpan]="9" nzRequired>channel</nz-form-label>
+            <nz-form-control [nzSpan]="14" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+                <input nz-input formControlName="channel" placeholder="type your new channel name." />
+                <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    Please input your channel!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('duplicated')">
+                    The channel name is a dulplicate!
+                </ng-container>
+                </ng-template>
+            </nz-form-control>
+            </nz-form-item>
+    
+            <nz-form-item>
+            <nz-form-label [nzSpan]="9" >Description</nz-form-label>
+            <nz-form-control [nzSpan]="14" nzErrorTip="Please write something here!">
+                <textarea formControlName="description" nz-input rows="2" placeholder="write a description."></textarea>
+            </nz-form-control>
+            </nz-form-item>
+         
+            <ng-template #modalFooter>
+                <button nz-button nzType="default" (click)="resetForm()">Reset</button>
+                <button nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="submitForm(validateForm.value, $event)" [nzLoading]="isAddLoading">
+                    Add
+                </button>
+            </ng-template>
+        </form>
+    </nz-modal>

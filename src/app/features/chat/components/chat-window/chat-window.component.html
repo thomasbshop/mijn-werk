@@ -8,9 +8,10 @@
           >
             <ng-template #contentTpl>
               <span> Select a channel. </span>
+              <p style="color:#f5222d;">or</p>
             </ng-template>
             <ng-template #footerTpl>
-              <button nz-button nzType="primary" (click)="onClick()">Create Now</button>
+              <button nz-button nzType="primary" (click)="onClick()">New Channel</button>
             </ng-template>
           </nz-empty>
         </ng-container>
@@ -56,9 +57,11 @@
 
         
         <ng-template #noMessages>
-          <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center">
-            <div class="select-room-message">
-              No Messages
-            </div>
-          </div>
+          <nz-empty
+          [nzNotFoundContent]="noMsgscontentTpl"
+          >
+            <ng-template #noMsgscontentTpl>
+              <p style="color:#f5222d;">No messages!</p>
+            </ng-template>
+          </nz-empty>
         </ng-template>

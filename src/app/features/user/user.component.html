@@ -2,10 +2,12 @@
     <app-header>
     </app-header>
     <nz-content class="outer-content">
-        <nz-page-header class="site-page-header" nzTitle="Profile" nzSubtitle="This is a subtitle">
+        <nz-page-header class="site-page-header" nzTitle="Profile" nzSubtitle="{{ currentUser?.firstName }} {{ currentUser?.lastName }}">
         </nz-page-header>
         <nz-layout class="inner-layout">
-          <app-side-nav></app-side-nav>
+          <nz-sider nzWidth="250px" nzTheme="light">
+            <app-side-nav-items [menuOptions]="channelService.channelIDs | async"></app-side-nav-items>
+          </nz-sider>
           <nz-content class="inner-content">
             <app-user-profile></app-user-profile>
           </nz-content>

@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatInputComponent } from './components/chat-input/chat-input.component';
-import { ChannelsComponent } from './components/channels/channels.component';
-import { ChatMessageComponent } from './components/chat-message/chat-message.component';
-import { ChatWindowComponent } from './components/chat-window/chat-window.component';
-import { ChatComponent } from './chat.component';
-import { LayoutModule } from '../../shared/layout/layout.module'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
@@ -20,8 +15,14 @@ import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { FormsModule } from '@angular/forms';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { ChannelService } from './services/channel.service';
+import { ChatInputComponent } from './components/chat-input/chat-input.component';
+import { ChannelsComponent } from './components/channels/channels.component';
+import { ChatMessageComponent } from './components/chat-message/chat-message.component';
+import { ChatWindowComponent } from './components/chat-window/chat-window.component';
+import { ChatComponent } from './chat.component';
+import { LayoutModule } from '../../shared/layout/layout.module'
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ChannelService } from './services/channel.service';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     NzLayoutModule,
     NzEmptyModule,
     NzCommentModule,
@@ -43,6 +45,7 @@ import { ChannelService } from './services/channel.service';
     NzBreadCrumbModule,
     NzPageHeaderModule,
     NzMenuModule,
+    NzModalModule,
     LayoutModule
   ],
   providers: [

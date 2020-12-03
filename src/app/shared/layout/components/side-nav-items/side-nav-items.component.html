@@ -20,7 +20,7 @@
     (nzOnCancel)="handleCancel()"
     [nzFooter]="modalFooter"
     >
-        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value)">
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value, $event)">
             <nz-form-item>
             <nz-form-label [nzSpan]="9" nzRequired>channel</nz-form-label>
             <nz-form-control [nzSpan]="14" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">

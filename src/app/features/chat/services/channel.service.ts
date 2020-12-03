@@ -45,10 +45,7 @@ export class ChannelService {
           return observableOf(null);
         })
       );
-      // db.collection("channel").ref.get().then((querySnapshot) => {
-      //       // doc.data() is never undefined for query doc snapshots
-      //       console.log(querySnapshot);
-      //   });
+
       this.channelIDs = db.collection('channel').snapshotChanges().pipe(
         map(changes => {
           return changes.map(change => {
@@ -75,18 +72,6 @@ export class ChannelService {
     
     newChannelRef.set(channel);
   }
-
-  // public   getCollection(): Observable<any[]> {
-  //   return db.collection('channel').snapshotChanges().pipe(
-  //     map(changes => {
-  //       return changes.map(change => {
-  //         const data = change.payload.doc.data();
-  //         const id = change.payload.doc.id;
-  //         return { id, ...data };
-  //       });
-  //     }
-  //   ));
-  // }
 
   public addMessage(text: string): void {
     const channelId = this.changeChannel.value;

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ChannelService } from 'src/app/features/chat/services/channel.service';
 
 @Component({

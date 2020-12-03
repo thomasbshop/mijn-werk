@@ -1,16 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { formatDistance } from 'date-fns';
-import { Observable, Subscription } from 'rxjs';
+import { error } from 'protractor';
+import { Observable, Observer, Subscription } from 'rxjs';
+import { find, map } from 'rxjs/operators';
 import { ChannelService } from '../../services/channel.service';
-
-interface ItemData {
-  href: string;
-  title: string;
-  avatar: string;
-  description: string;
-  content: string;
-}
 
 @Component({
   selector: 'app-chat-window',
@@ -24,9 +19,14 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
   public messages?: Observable<any>;
   public newMessageText: string = '';
 
+  validateForm: FormGroup;
+  isVisible = false;
+  isAddLoading = false;
+
   constructor(
     private route: ActivatedRoute,
-    private channelService: ChannelService
+    private channelService: ChannelService,
+    private fb: FormBuilder
   ) { 
     this.subscriptions.push(
       this.channelService.selectedChannel.subscribe(channel => {
@@ -39,10 +39,13 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
         this.messages = messages;
       })
     );
+
+    this.validateForm = this.fb.group({
+      channel: ['', [Validators.required], [this.channelNameAsyncValidator]],
+      description: ['', [Validators.required]]
+    });
   }
 
-    // tslint:disable-next-line:no-any
-  data: any[] = [];
   submitting = false;
   user = {
     author: 'Han Solo',
@@ -51,7 +54,6 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
 
   likes = 0;
   dislikes = 0;
-  time = formatDistance(new Date(), new Date());
 
   like(): void {
     // this.likes = 1;
@@ -63,23 +65,8 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
     // this.dislikes = 1;
   }
 
-  loadMessages() {}
-  loadData(pi: number): void {
-    this.data = new Array(5).fill({}).map((_, index) => {
-      return {
-        href: 'http://ant.design',
-        title: `ant design part ${index} (page: ${pi})`,
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources ' +
-          '(Sketch and Axure), to help people create their product prototypes beautifully and efficiently.'
-      };
-    });
-  }
-
   onClick(): void {
-    console.log('clicked');
+    this.isVisible = true;
   }
 
   public newMessage(message: string): void {
@@ -90,12 +77,58 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
     this.newMessageText = '';
   }
 
+  // modal form
+  handleCancel(): void {
+    this.isVisible = false;
+  }
+
+  submitForm(value: { channel: string; description: string }, e: MouseEvent): void {
+    this.isAddLoading = true;
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsDirty();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
+    console.log(value);
+    this.channelService.addChannel(value);
+    this.isVisible = false;
+    this.isAddLoading = false;
+    this.resetForm(e)
+  }
+
+  resetForm(e: MouseEvent): void {
+    e.preventDefault();
+    this.validateForm.reset();
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsPristine();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
+  }
+
+  // checks if the channel exists.
+  channelNameAsyncValidator = (control: FormControl) =>
+    new Observable((observer: Observer<ValidationErrors | null>) => {
+      setTimeout(() => {
+        const channels = this.channelService.channelIDs;
+        let nameExists = channels.pipe(
+          map(channels => {return channels.map(x => x.name).find(( x: any ) =>  x === control.value )}));
+        nameExists.subscribe(found => {
+          console.log(found); return found}, error => console.log(error));
+          console.log(nameExists)
+          if (nameExists) {
+            // you have to return `{error: true}` to mark it as an error event
+            observer.next({ error: true, duplicated: true });
+          } else {
+            observer.next(null);
+          }
+          observer.complete();
+      }, 100);
+  });
+
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   ngOnInit(): void {
-    this.loadData(1);
     this.subscriptions.push(
       this.route.paramMap.subscribe(params => {
         const channelId = params.get('channelId');

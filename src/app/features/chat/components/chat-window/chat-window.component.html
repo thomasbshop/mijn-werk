@@ -1,67 +1,105 @@
-    <div class="inner-content">
-        <ng-container *ngIf="!channel else chatMessages">
-          <nz-empty
-          nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-          [nzNotFoundContent]="contentTpl"
-          [nzNotFoundFooter]="footerTpl"
-          style="top: 50%; transform: translateY(80%);"
-          >
-            <ng-template #contentTpl>
-              <span> Select a channel. </span>
-              <p style="color:#f5222d;">or</p>
-            </ng-template>
-            <ng-template #footerTpl>
-              <button nz-button nzType="primary" (click)="onClick()">New Channel</button>
-            </ng-template>
-          </nz-empty>
-        </ng-container>
-
-        <ng-template #chatMessages> 
-          <h3 [ngStyle]="{ margin: '8px 0' }">{{ channel.name }}</h3>
-          <nz-divider></nz-divider>
-          <nz-list *ngIf="messages.length else noMessages" [nzItemLayout]="'horizontal'">
-            <ng-container *ngFor="let message of messages">
-              <nz-comment nzAuthor="{{message.sender.firstName}} {{message.sender.lastName}}" [nzDatetime]="message.createdAt.toDate() | date: 'short':'UTC'">
-                <nz-avatar nz-comment-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
-                <nz-comment-content>
-                  <p>{{ message.message }}</p>
-                </nz-comment-content>
-                <nz-comment-action>
-                  <i nz-tooltip nzTitle="Like" nz-icon nzType="like" [nzTheme]="likes > 0 ? 'twotone' : 'outline'" (click)="like()"></i>
-                  <span class="count like">{{ likes }}</span>
-                </nz-comment-action>
-                <nz-comment-action>
-                  <i nz-tooltip nzTitle="Dislike" nz-icon nzType="dislike" [nzTheme]="dislikes > 0 ? 'twotone' : 'outline'" (click)="dislike()"></i>
-                  <span class="count dislike">{{ dislikes }}</span>
-                </nz-comment-action>
-                <nz-comment-action>Reply to</nz-comment-action>
-              </nz-comment>
-            </ng-container>
-          </nz-list>
-          <nz-comment>
-            <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
-            <nz-comment-content>
-              <nz-form-item>
-                <textarea [(ngModel)]="newMessageText" nz-input rows="3"></textarea>
-              </nz-form-item>
-              <nz-form-item>
-                <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!newMessageText" (click)="newMessage(newMessageText)">
-                  Add Comment
-                </button>
-              </nz-form-item>
-            </nz-comment-content>
-          </nz-comment>
-        </ng-template>  
-
-    </div>
-
-        
-        <ng-template #noMessages>
-          <nz-empty
-          [nzNotFoundContent]="noMsgscontentTpl"
-          >
-            <ng-template #noMsgscontentTpl>
-              <p style="color:#f5222d;">No messages!</p>
-            </ng-template>
-          </nz-empty>
+<div class="inner-content">
+    <ng-container *ngIf="!channel else chatMessages">
+      <nz-empty
+      nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+      [nzNotFoundContent]="contentTpl"
+      [nzNotFoundFooter]="footerTpl"
+      style="top: 50%; transform: translateY(80%);"
+      >
+        <ng-template #contentTpl>
+          <span> Select a channel. </span>
+          <p style="color:#f5222d;">or</p>
         </ng-template>
+        <ng-template #footerTpl>
+          <button nz-button nzType="primary" (click)="onClick()">New Channel</button>
+        </ng-template>
+      </nz-empty>
+    </ng-container>
+
+    <ng-template #chatMessages> 
+      <h3 [ngStyle]="{ margin: '8px 0' }">{{ channel.name }}</h3>
+      <nz-divider></nz-divider>
+      <nz-list *ngIf="messages.length else noMessages" [nzItemLayout]="'horizontal'">
+        <ng-container *ngFor="let message of messages">
+          <nz-comment nzAuthor="{{message.sender.firstName}} {{message.sender.lastName}}" [nzDatetime]="message.createdAt.toDate() | date: 'short':'UTC'">
+            <nz-avatar nz-comment-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+            <nz-comment-content>
+              <p>{{ message.message }}</p>
+            </nz-comment-content>
+            <nz-comment-action>
+              <i nz-tooltip nzTitle="Like" nz-icon nzType="like" [nzTheme]="likes > 0 ? 'twotone' : 'outline'" (click)="like()"></i>
+              <span class="count like">{{ likes }}</span>
+            </nz-comment-action>
+            <nz-comment-action>
+              <i nz-tooltip nzTitle="Dislike" nz-icon nzType="dislike" [nzTheme]="dislikes > 0 ? 'twotone' : 'outline'" (click)="dislike()"></i>
+              <span class="count dislike">{{ dislikes }}</span>
+            </nz-comment-action>
+            <nz-comment-action>Reply to</nz-comment-action>
+          </nz-comment>
+        </ng-container>
+      </nz-list>
+      <nz-comment>
+        <nz-avatar nz-comment-avatar nzIcon="user" [nzSrc]="user.avatar"></nz-avatar>
+        <nz-comment-content>
+          <nz-form-item>
+            <textarea [(ngModel)]="newMessageText" nz-input rows="3"></textarea>
+          </nz-form-item>
+          <nz-form-item>
+            <button nz-button nzType="primary" [nzLoading]="submitting" [disabled]="!newMessageText" (click)="newMessage(newMessageText)">
+              Add Comment
+            </button>
+          </nz-form-item>
+        </nz-comment-content>
+      </nz-comment>
+    </ng-template>  
+
+</div>
+
+    
+<ng-template #noMessages>
+  <nz-empty
+  [nzNotFoundContent]="noMsgscontentTpl"
+  >
+    <ng-template #noMsgscontentTpl>
+      <p style="color:#f5222d;">No messages!</p>
+    </ng-template>
+  </nz-empty>
+</ng-template>
+
+<nz-modal
+[(nzVisible)]="isVisible"
+nzTitle="Add Channel"
+(nzOnCancel)="handleCancel()"
+[nzFooter]="modalFooter"
+>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm(validateForm.value, $event)">
+        <nz-form-item>
+        <nz-form-label [nzSpan]="9" nzRequired>channel</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+            <input nz-input formControlName="channel" placeholder="type your new channel name." />
+            <ng-template #userErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+                Please input your channel!
+            </ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">
+                The channel name is a dulplicate!
+            </ng-container>
+            </ng-template>
+        </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+        <nz-form-label [nzSpan]="9" >Description</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Please write something here!">
+            <textarea formControlName="description" nz-input rows="2" placeholder="write a description."></textarea>
+        </nz-form-control>
+        </nz-form-item>
+     
+        <ng-template #modalFooter>
+            <button nz-button nzType="default" (click)="resetForm()">Reset</button>
+            <button nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="submitForm(validateForm.value, $event)" [nzLoading]="isAddLoading">
+                Add
+            </button>
+        </ng-template>
+    </form>
+</nz-modal>
